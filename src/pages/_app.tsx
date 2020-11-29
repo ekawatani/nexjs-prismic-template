@@ -1,16 +1,11 @@
 import React from 'react';
 import type { AppProps } from 'next/app';
-import { Layout } from '../layouts/Layout';
 import '../styles/app.scss';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const App: React.FunctionComponent<AppProps> = props => {
   return (
-    <>
-      <Layout>
-        <props.Component {...props.pageProps} />
-      </Layout>
-    </>
+    <props.Component {...props.pageProps} />
   );
 };
 

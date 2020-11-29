@@ -12,7 +12,7 @@ const i18n = require('../i18n.json');
 const TEMP_DIR = path.join('../.tmp');
 const PUBLIC_DIR = path.join('../public');
 const FONT_DIR = path.join(PUBLIC_DIR, `fonts`);
-const FONT_NAME = 'AppliMincho.otf';
+const FONT_NAME = 'AppliMincho.ttf';
 
 const extractCharacters = (locale) => {
   const characters = new Set();
@@ -39,6 +39,7 @@ const extractCharacters = (locale) => {
 const optimizeFont = (text, originalFontPath) => {
   new Fontmin()
     .src(originalFontPath)
+    .use(Fontmin.otf2ttf())
     .dest(FONT_DIR)
     .use(rename(FONT_NAME))
     .use(Fontmin.glyph({
@@ -57,8 +58,9 @@ const buildOptimizedFonts = () => {
     characters.forEach(extractedCharSet.add.bind(extractedCharSet));
   }
 
-  console.log([...extractedCharSet].join(''));
-  optimizeFont(extractedCharSet, `../fonts/appli-mincho.otf`);
+  const characters = [...extractedCharSet].join('');
+  console.log(characters);
+  optimizeFont(characters, `../fonts/appli-mincho.otf`);
 };
 
 buildOptimizedFonts();

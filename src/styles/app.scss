@@ -2,7 +2,7 @@
 
 @font-face {
   font-family: "AppliMincho";
-  src: url("/fonts/AppliMincho.otf");
+  src: local("AppliMincho"), url("/fonts/AppliMincho.otf");
 }
 
 body {
