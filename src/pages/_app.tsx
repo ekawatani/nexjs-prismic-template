@@ -1,29 +1,12 @@
 import React from 'react';
 import type { AppProps } from 'next/app';
-import Head from 'next/head';
 import { Layout } from '../layouts/Layout';
 import '../styles/app.scss';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const App: React.FunctionComponent<AppProps> = props => {
-  const fontName = `fonts-${props.pageProps.locale}`;
-
   return (
     <>
-      <Head>
-        <style>
-          {`
-            @font-face {
-              font-family: "${fontName}";
-              src: url("/fonts/${fontName}.otf");
-            }
-
-            body {
-              font-family: "${fontName}";
-            }
-          `}
-        </style>
-      </Head>
       <Layout>
         <props.Component {...props.pageProps} />
       </Layout>

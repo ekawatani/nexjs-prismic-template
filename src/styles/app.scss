@@ -1,1 +1,10 @@
 @import "./containers.scss";
+
+@font-face {
+  font-family: "AppliMincho";
+  src: url("/fonts/AppliMincho.otf");
+}
+
+body {
+  font-family: "AppliMincho";
+}

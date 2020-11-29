@@ -9,26 +9,14 @@ const i18n = require('../i18n.json');
  * NOTE: This script must be executed from the project root because file paths are set relative to the root directory.
  */
 
-const tmpDirectory = path.join('../.tmp');
-const publicDirectory = path.join('../public');
-const fontDirectory = path.join(publicDirectory, `fonts`);
+const TEMP_DIR = path.join('../.tmp');
+const PUBLIC_DIR = path.join('../public');
+const FONT_DIR = path.join(PUBLIC_DIR, `fonts`);
+const FONT_NAME = 'AppliMincho.otf';
 
-const requiresOptimization = (locale) => {
-  return locale === 'ja';
-};
-
-const getOriginalFont = (locale) => {
-  switch (locale) {
-    case 'ja':
-      return 'appli-mincho.otf';
-    default:
-      throw new Error(`No original font found for locale ${locale}`);
-  }
-};
-
-const extractText = (locale) => {
-  const text = new Set();
-  const localeData = JSON.parse(fs.readFileSync(`${tmpDirectory}/${locale}.json`, 'utf8'));
+const extractCharacters = (locale) => {
+  const characters = new Set();
+  const localeData = JSON.parse(fs.readFileSync(`${TEMP_DIR}/${locale}.json`, 'utf8'));
 
   for (const textKey in localeData) {
     const textData = localeData[textKey];
@@ -38,21 +26,21 @@ const extractText = (locale) => {
         if (node.type === 'text') {
           // Add a character one by one so duplicated characters are removed automatically.
           for (let character of node.data) {
-            text.add(character);
+            characters.add(character);
           }
         }
       },
     });
   }
 
-  return [...text].join('');
+  return [...characters];
 };
 
-const optimizeFont = (text, locale, originalFontPath) => {
+const optimizeFont = (text, originalFontPath) => {
   new Fontmin()
     .src(originalFontPath)
-    .dest(fontDirectory)
-    .use(rename(`fonts-${locale}.otf`))
+    .dest(FONT_DIR)
+    .use(rename(FONT_NAME))
     .use(Fontmin.glyph({
       text,
     }))
@@ -60,16 +48,17 @@ const optimizeFont = (text, locale, originalFontPath) => {
 };
 
 const buildOptimizedFonts = () => {
+  const extractedCharSet = new Set();
+
   for (const locale of i18n.locales) {
-    if (!requiresOptimization(locale)) {
-      continue;
-    }
-  
-    const text = extractText(locale);
-    console.log(text);
-    const originalFont = getOriginalFont(locale);
-    optimizeFont(text, locale, `../fonts/${originalFont}`);
+    const characters = extractCharacters(locale);
+    
+    // Use a set to remove duplicate characters across different languages.
+    characters.forEach(extractedCharSet.add.bind(extractedCharSet));
   }
+
+  console.log([...extractedCharSet].join(''));
+  optimizeFont(extractedCharSet, `../fonts/appli-mincho.otf`);
 };
 
 buildOptimizedFonts();
