@@ -7,5 +7,5 @@ i18npack.generate(path.join(process.cwd(), 'i18n/locales/**/*.yml'), {
   includeLangDetails: false,
   strict: true,
   mergeFilesAtRoot: true,
-  dest: '.tmp'
+  dest: '../.tmp'
 });

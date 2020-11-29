@@ -5,10 +5,6 @@ const Fontmin = require('fontmin');
 var rename = require('gulp-rename');
 const i18n = require('../i18n.json');
 
-/*
- * NOTE: This script must be executed from the project root because file paths are set relative to the root directory.
- */
-
 const TEMP_DIR = path.join('../.tmp');
 const PUBLIC_DIR = path.join('../public');
 const FONT_DIR = path.join(PUBLIC_DIR, `fonts`);
