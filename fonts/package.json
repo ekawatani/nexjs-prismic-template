@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "postinstall": "pip install fonttools",
+    "postinstall": "pip3 install fonttools",
     "build": "python3 build-fonts.py"
   }
 }
