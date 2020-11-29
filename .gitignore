@@ -6,3 +6,4 @@ dist/
 public/admin/
 public/fonts/
 .tmp/
+.env.local
