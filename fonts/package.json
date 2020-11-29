@@ -3,10 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "node build-fonts.js"
-  },
-  "devDependencies": {
-    "fontmin": "^0.9.8",
-    "gulp-rename": "^2.0.0"
+    "postinstall": "pipenv install",
+    "build": "pipenv run python3 build-fonts.py"
   }
 }
