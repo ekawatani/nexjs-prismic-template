@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "preinstall": "python3 scripts/preinstall.py",
     "postinstall": "pipenv install",
     "build": "pipenv run python3 build-fonts.py"
   }
