@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "preinstall": "./scripts/preinstall.sh",
-    "postinstall": "pipenv install",
-    "build": "pipenv run python3 build-fonts.py"
+    "postinstall": "./scripts/postinstall.sh",
+    "build": "./scripts/build.sh"
   }
 }
