@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "postinstall": "pip3 install fonttools",
-    "build": "python3 build-fonts.py"
+    "postinstall": "node scripts/install.js",
+    "build": "node scripts/build.js"
   }
 }
