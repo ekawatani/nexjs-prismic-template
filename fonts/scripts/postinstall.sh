@@ -2,7 +2,7 @@
 
 if [ "$VERCEL_ENV" = "production" ]
 then
-  pip3 install -Iv pipenv==2020.11.15
+  pip3 install -Iv fonttools==4.17.1
 else
   pipenv install
 fi
