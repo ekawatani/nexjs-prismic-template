@@ -6,6 +6,8 @@ import { Masthead } from '../components/Masthead';
 import { Content } from '../components/layouts/containers.css/Content';
 import { Page } from '../components/templates/Page';
 import { TestData, fetchTestData } from '../lib/testData';
+// import { saveExtractedText } from '../lib/text';
+import fs from 'fs';
 import { t } from '../locale/locale';
 import { PageProps, getPageProps } from '../shared/page';
 
@@ -55,6 +57,13 @@ export const getStaticProps: GetStaticProps = async (context): Promise<{ props: 
   const pageProps = getPageProps(context.locale);
   const testData = await fetchTestData(context.previewData);
 
+  const outputFilePath = `${process.cwd()}/.tmp/index.txt`;
+  if (!fs.existsSync(outputFilePath)) {
+    for (const provider of testData.map(data => (() => data.title))) {
+      fs.appendFileSync(outputFilePath, provider(), { encoding: 'utf8' });
+    }
+  }
+  
   return {
     props: {
       ...pageProps,
