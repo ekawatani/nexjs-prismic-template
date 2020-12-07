@@ -1,12 +1,11 @@
 import React from 'react';
 import type { GetStaticProps } from 'next';
-import { Heading } from '../components/Heading';
-import { Link } from '../components/Link';
-import { Masthead } from '../components/Masthead';
-import { Content } from '../components/layouts/containers.css/Content';
-import { Page } from '../components/templates/Page';
+import { Heading } from '../ui/components/Heading';
+import { Link } from '../ui/components/Link';
+import { Masthead } from '../ui/components/Masthead';
+import { Content } from '../ui/layouts/containers.css/Content';
+import { Page } from '../ui/templates/Page';
 import { TestData, fetchTestData } from '../lib/testData';
-// import { saveExtractedText } from '../lib/text';
 import fs from 'fs';
 import { t } from '../locale/locale';
 import { PageProps, getPageProps } from '../shared/page';

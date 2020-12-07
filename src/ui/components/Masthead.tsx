@@ -1,7 +1,7 @@
 import React from 'react';
 import { Heading } from './Heading';
-import { Band } from './layouts/containers.css/Band';
-import { Content } from './layouts/containers.css/Content';
+import { Band } from '../layouts/containers.css/Band';
+import { Content } from '../layouts/containers.css/Content';
 
 export interface MastheadProps {
   title: () => React.ReactNode;
