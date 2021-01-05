@@ -1,2 +1,3 @@
-$containers-css-components-all: true;
-@import '~containers.css/containers.scss';
+@use '~containers.css/containers.scss' with (
+  $containers-css-components-all: true
+);

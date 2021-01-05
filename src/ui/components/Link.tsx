@@ -1,12 +1,23 @@
 import React from 'react';
+import NextLink from 'next/link';
 
 export interface LinkProps {
   href: string;
-  target?: '_self' | '_blank';
+  className?: string;
+  theme?: string;
+  attrs?: React.AriaAttributes;
 }
 
-export const Link: React.FunctionComponent<LinkProps> = props => {
+export const Link = React.forwardRef<HTMLAnchorElement, LinkProps & { children: React.ReactNode }>(function Link(props, ref) {
   return (
-    <a href={props.href} target={props.target}>{props.children}</a>
+    <NextLink href={props.href}>
+      <a
+        className={props.className}
+        {...props.attrs}
+        ref={ref}
+      >
+        {props.children}
+      </a>
+    </NextLink>
   );
-};
+});

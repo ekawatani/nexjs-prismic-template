@@ -1,11 +1,15 @@
 import React from 'react';
 import type { AppProps } from 'next/app';
 import '../styles/app.scss';
+import { LocaleContext, ILocaleContext } from '../locale/LocaleContext';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const App: React.FunctionComponent<AppProps> = props => {
+  const contextValue = React.useMemo<ILocaleContext>(() => ({ locale: props.pageProps.locale }), []);
   return (
-    <props.Component {...props.pageProps} />
+    <LocaleContext.Provider value={contextValue}>
+      <props.Component {...props.pageProps} />
+    </LocaleContext.Provider>
   );
 };
 

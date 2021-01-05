@@ -6,8 +6,8 @@ export interface PageProps {
   text: LocalizedText;
 }
 
-export const getPageProps = (locale: string): PageProps => {
-  const text = loadLocale(locale);
+export const getPageProps = async (locale: string): Promise<PageProps> => {
+  const text = await loadLocale(locale);
 
   const props: PageProps = {
     locale,

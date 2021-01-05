@@ -1,14 +1,14 @@
+import fs from 'fs';
 import React from 'react';
 import type { GetStaticProps } from 'next';
 import { Heading } from '../ui/components/Heading';
 import { Link } from '../ui/components/Link';
 import { Masthead } from '../ui/components/Masthead';
-import { Content } from '../ui/layouts/containers.css/Content';
+import { Content } from '../ui/components/layouts/containers.css/Content';
 import { Page } from '../ui/templates/Page';
+import { PageProps, getPageProps } from '../lib/page';
 import { TestData, fetchTestData } from '../lib/testData';
-import fs from 'fs';
-import { t } from '../locale/locale';
-import { PageProps, getPageProps } from '../shared/page';
+import { t, tStr } from '../locale/text';
 
 export interface IndexProps extends PageProps {
   testData: TestData[];
@@ -17,8 +17,8 @@ export interface IndexProps extends PageProps {
 const Index: React.FunctionComponent<IndexProps> = props => {
   return (
     <Page
-      title={t(props.text.title, { ignoreFormatting: true }) as string}
-      description={t(props.text.siteDescription, { ignoreFormatting: true }) as string}
+      title={tStr(props.text.title) as string}
+      description={tStr(props.text.siteDescription) as string}
     >
       <header role='banner'>
 
@@ -53,7 +53,7 @@ const Index: React.FunctionComponent<IndexProps> = props => {
 };
 
 export const getStaticProps: GetStaticProps = async (context): Promise<{ props: IndexProps }> => {
-  const pageProps = getPageProps(context.locale);
+  const pageProps = await getPageProps(context.locale);
   const testData = await fetchTestData(context.previewData);
 
   const outputFilePath = `${process.cwd()}/.tmp/index.txt`;
